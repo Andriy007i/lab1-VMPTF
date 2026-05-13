@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Мій Django Блог</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f6; margin: 0; padding: 40px; color: #333; }
+        .container { max-width: 800px; margin: auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        h1 { color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
+        .article-item { border-bottom: 1px solid #eee; padding: 20px 0; transition: 0.3s; }
+        .article-item:hover { background: #fafafa; }
+        .article-item h2 a { color: #2980b9; text-decoration: none; }
+        .meta { font-size: 0.9em; color: #7f8c8d; margin-top: 5px; }
+        .author-link { background: #3498db; color: white !important; padding: 2px 8px; border-radius: 4px; text-decoration: none; font-weight: bold; }
+        .home-btn { display: inline-block; margin-bottom: 20px; color: #7f8c8d; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        {% if author_filter %}
+            <a href="{% url 'article_list' %}" class="home-btn">← На головну</a>
+            <h1>Статті автора: {{ author_filter }}</h1>
+        {% else %}
+            <h1>Останні публікації</h1>
+        {% endif %}
+
+        {% for article in articles %}
+            <div class="article-item">
+                <h2><a href="{% url 'article_detail' article.pk %}">{{ article.title }}</a></h2>
+                <div class="meta">
+                    Автор: <a href="{% url 'author_articles' article.author %}" class="author-link">{{ article.author }}</a> 
+                    | Дата: {{ article.published_date|date:"d M Y" }}
+                </div>
+            </div>
+        {% empty %}
+            <p>Статей поки немає.</p>
+        {% endfor %}
+    </div>
+</body>
+</html>

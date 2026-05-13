@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{{ article.title }}</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background-color: #f4f7f6; padding: 40px; }
+        .container { max-width: 800px; margin: auto; background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        h1 { color: #2c3e50; margin-top: 0; }
+        .meta { color: #95a5a6; margin-bottom: 30px; padding-bottom: 10px; border-bottom: 1px solid #eee; }
+        .content { line-height: 1.8; font-size: 1.1em; color: #34495e; white-space: pre-line; }
+        .back-link { margin-top: 30px; display: block; color: #3498db; text-decoration: none; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>{{ article.title }}</h1>
+        <div class="meta">
+            Автор: <b>{{ article.author }}</b> | 
+            Опубліковано: {{ article.published_date|date:"d.m.Y H:i" }}
+        </div>
+        <div class="content">
+            {{ article.text }}
+        </div>
+        <a href="{% url 'article_list' %}" class="back-link">← Назад до списку</a>
+    </div>
+</body>
+</html>
